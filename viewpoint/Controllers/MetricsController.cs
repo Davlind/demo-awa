@@ -27,10 +27,10 @@ namespace viewpoint.Controllers
             {
                 var metrics = cacheHelper.Get();
 
-                var instance = Environment.GetEnvironmentVariable("INSTANCE_ID") ?? "LOCALHOST";
-                metrics.InstanceName = instance;
+                var instance = Environment.GetEnvironmentVariable("WEBSITE_INSTANCE_ID") ?? "LOCALHOST";
+                metrics.InstanceName = instance.Substring(0, Math.Min(16, instance.Length));
 
-                metrics.Version = "1.0.0.0";
+                metrics.Version = "2.0.0.0";
 
                 // memory
                 leakedMemory = new byte[metrics.MemoryLeak];
